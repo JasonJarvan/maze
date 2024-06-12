@@ -1,9 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from bokeh.plotting import figure
-from bokeh.embed import components
-from bokeh.resources import CDN
-from maze import generate_maze, visualize_maze
+from bokeh.embed import json_item
+from maze import generate_maze
 from shortest_path import find_shortest_path
 
 app = Flask(__name__)
@@ -13,10 +12,18 @@ CORS(app)
 @app.route('/generate_maze', methods=['GET'])
 def generate_maze_route():
     maze, start, end, path_length = generate_maze(10, 10)
-    script, div = visualize_maze(maze, start, end)
+    plot = figure(width=400, height=400)
+    for i, row in enumerate(maze):
+        for j, cell in enumerate(row):
+            color = "red" if cell == 1 else "white"
+            if (i, j) == start:
+                color = "blue"
+            elif (i, j) == end:
+                color = "black"
+            plot.rect(x=j, y=i, width=1, height=1, color=color)
+    item = json_item(plot)
     return jsonify({
-        'script': script,
-        'div': div,
+        'plot': item,
         'start': start,
         'end': end,
         'path_length': path_length
