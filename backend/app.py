@@ -18,19 +18,21 @@ def index():
 def check_path():
     data = request.get_json()
     maze = data['maze']
-    start = tuple(data['start'])  # 转换为元组
-    end = tuple(data['end'])  # 转换为元组
+    start = tuple(data['start'])
+    end = tuple(data['end'])
     user_length = int(data['length'])
 
     solution, path_length = solve_maze(maze, start, end)
     if solution:
         correct = (user_length == path_length)
+        pathExists = True
         message = "Correct!" if correct else f"Incorrect! The correct length is {path_length}."
     else:
         correct = False
+        pathExists = False
         message = "No path exists."
 
-    return jsonify(correct=correct, message=message)
+    return jsonify(correct=correct, message=message, pathExists=pathExists)
 
 
 @app.route('/get_hint', methods=['POST'])
@@ -43,12 +45,14 @@ def get_hint():
     solution, path_length, directions = solve_maze(maze, start, end, hint=True)
     if solution:
         script, div = render_maze(maze, start, end, directions=directions)
-        hint = ''.join(directions)
+        pathExists = True
+        hint = f"The solution is {''.join(directions)}. The correct length is {path_length}."
     else:
         script, div = render_maze(maze, start, end)
+        pathExists = False
         hint = "No path exists."
 
-    return jsonify(script=script, div=div, hint=hint)
+    return jsonify(script=script, div=div, hint=hint, pathExists=pathExists)
 
 
 def render_maze(maze, start, end, directions=None):

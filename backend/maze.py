@@ -9,9 +9,14 @@ def generate_maze(width, height):
     maze[end[0]][end[1]] = 0
     return maze, start, end
 
+
 def solve_maze(maze, start, end, hint=False):
     directions = ['U', 'D', 'L', 'R']
     dir_vectors = {'U': (-1, 0), 'D': (1, 0), 'L': (0, -1), 'R': (0, 1)}
+
+    # 将start和end从列表转换为元组
+    start = tuple(start)
+    end = tuple(end)
 
     queue = deque([(start, [])])
     visited = set()
