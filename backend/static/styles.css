@@ -5,8 +5,24 @@ body {
 h1 {
     color: #2e484c;
     font-family: 'Julius Sans One', sans-serif;
-    font-size: 1.8em;
+    font-size: 2.5em;
     text-transform: uppercase;
+    margin-bottom: 20px;
 }
 
-input[type="text"]
+#maze-container {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.input-group .form-control {
+    border-radius: 0;
+}
+
+.input-group .btn {
+    border-radius: 0;
+}

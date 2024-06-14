@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1dd8dd20-5205-49b7-bef2-186adbffc0fe" name="更改" comment="finish generate">
+    <list default="true" id="1dd8dd20-5205-49b7-bef2-186adbffc0fe" name="更改" comment="finish v1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/maze.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/maze.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/static/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/backend/static/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -136,7 +135,7 @@
       <option name="presentableId" value="Default" />
       <updated>1718168145914</updated>
       <workItem from="1718168147622" duration="24520000" />
-      <workItem from="1718350781324" duration="18061000" />
+      <workItem from="1718350781324" duration="18772000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -186,7 +185,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718370130096</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="finish v1">
+      <option name="closed" value="true" />
+      <created>1718379332390</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1718379332390</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -199,7 +206,8 @@
     <MESSAGE value="new" />
     <MESSAGE value="using python only" />
     <MESSAGE value="finish generate" />
-    <option name="LAST_COMMIT_MESSAGE" value="finish generate" />
+    <MESSAGE value="finish v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish v1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

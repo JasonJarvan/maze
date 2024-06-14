@@ -3,21 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Maze Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js"></script>
     <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
     <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js"></script>
 </head>
 <body>
-    <h1>Maze</h1>
-    <div id="maze-container">
-        {{ div | safe }}
+    <div class="container text-center">
+        <h1 class="my-4">MAZE</h1>
+        <div id="maze-container" class="d-flex justify-content-center">
+            {{ div | safe }}
+        </div>
+        {{ script | safe }}
+        <div class="input-group my-3 justify-content-center">
+            <input type="text" id="path-length" class="form-control" placeholder="Enter path length">
+            <div class="input-group-append">
+                <button class="btn btn-primary" onclick="checkPath()">Check Path</button>
+                <button class="btn btn-secondary" onclick="getHint()">Get Hint</button>
+                <button class="btn btn-danger" onclick="resetMaze()">Reset</button>
+            </div>
+        </div>
+        <p id="message" class="text-info"></p>
     </div>
-    {{ script | safe }}
-    <input type="text" id="path-length" placeholder="Enter path length">
-    <button onclick="checkPath()">Check Path</button>
-    <button onclick="getHint()">Get Hint</button>
-    <p id="message"></p>
 
     <script>
         function checkPath() {
@@ -38,7 +46,7 @@
             .then(data => {
                 document.getElementById("message").innerText = data.message;
                 if (data.correct || !data.pathExists) {
-                    location.reload();
+                    loadNewMaze();
                 }
             });
         }
@@ -61,6 +69,20 @@
                 if (data.correct || !data.pathExists) {
                     location.reload();
                 }
+            });
+        }
+
+        function resetMaze() {
+            loadNewMaze();
+        }
+
+        function loadNewMaze() {
+            fetch('/')
+            .then(response => response.text())
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
             });
         }
     </script>
