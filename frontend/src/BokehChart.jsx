@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { embed } from '@bokeh/bokehjs';
+import { embed } from 'bokehjs';
 
 const BokehChart = ({ plot }) => {
   useEffect(() => {
