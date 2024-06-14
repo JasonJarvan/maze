@@ -2,11 +2,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#path-form {
-    margin-top: 20px;
+h1 {
+    color: #2e484c;
+    font-family: 'Julius Sans One', sans-serif;
+    font-size: 1.8em;
+    text-transform: uppercase;
 }
 
-#result {
-    margin-top: 20px;
-    font-weight: bold;
-}
+input[type="text"]

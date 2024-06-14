@@ -2,63 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Maze Solver</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.3.2.min.js"></script>
+    <title>Maze Game</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.4.2.min.js"></script>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.4.2.min.js"></script>
 </head>
 <body>
     <h1>Maze</h1>
-    <div>{{ div|safe }}</div>
-    <script>{{ script|safe }}</script>
-    <form id="path-form">
-        <label for="path-length">Enter the length of the shortest path:</label>
-        <input type="number" id="path-length" name="path-length">
-        <button type="submit">Submit</button>
-    </form>
-    <button id="hint-button">Get Hint</button>
-    <div id="result"></div>
+    <div>
+        {{ div | safe }}
+    </div>
+    {{ script | safe }}
+    <input type="text" id="path-length" placeholder="Enter path length">
+    <button onclick="checkPath()">Check Path</button>
+    <button onclick="getHint()">Get Hint</button>
+    <p id="message"></p>
+
     <script>
-        document.getElementById('path-form').onsubmit = function(event) {
-            event.preventDefault();
-            const length = document.getElementById('path-length').value;
+        function checkPath() {
+            const length = document.getElementById("path-length").value;
             fetch('/check_path', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    length: length,
-                    start: "{{ start }}",
-                    end: "{{ end }}",
-                    maze: "{{ maze }}",
-                }),
+                    maze: {{ maze | tojson }},
+                    start: {{ start | tojson }},
+                    end: {{ end | tojson }},
+                    length: length
+                })
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').innerText = data.result;
-                if (data.path) {
-                    document.getElementById('result').innerText += ` Path: ${data.path}`;
+                document.getElementById("message").innerText = data.message;
+                if (data.correct) {
+                    location.reload();
                 }
             });
-        };
+        }
 
-        document.getElementById('hint-button').onclick = function() {
-            fetch('/hint', {
+        function getHint() {
+            fetch('/get_hint', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    start: "{{ start }}",
-                    end: "{{ end }}",
-                    maze: "{{ maze }}",
-                }),
+                    maze: {{ maze | tojson }},
+                    start: {{ start | tojson }},
+                    end: {{ end | tojson }}
+                })
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('result').innerText = `Hint: ${data.path}`;
+                document.getElementById("message").innerText = data.hint;
+                document.querySelector("div").innerHTML = data.div;
+                Bokeh.embed.embed_item(data.script);
             });
-        };
+        }
     </script>
 </body>
 </html>
