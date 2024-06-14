@@ -2,11 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maze Solver</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.3.2.min.js"></script>
 </head>
 <body>
-    <div id="root"></div>
-    <script src="http://localhost:50190/static/js/bundle.js"></script>
+    <h1>Maze</h1>
+    <div>{{ div|safe }}</div>
+    <script>{{ script|safe }}</script>
+    <form id="path-form">
+        <label for="path-length">Enter the length of the shortest path:</label>
+        <input type="number" id="path-length" name="path-length">
+        <button type="submit">Submit</button>
+    </form>
+    <button id="hint-button">Get Hint</button>
+    <div id="result"></div>
+    <script>
+        document.getElementById('path-form').onsubmit = function(event) {
+            event.preventDefault();
+            const length = document.getElementById('path-length').value;
+            fetch('/check_path', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    length: length,
+                    start: "{{ start }}",
+                    end: "{{ end }}",
+                    maze: "{{ maze }}",
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = data.result;
+                if (data.path) {
+                    document.getElementById('result').innerText += ` Path: ${data.path}`;
+                }
+            });
+        };
+
+        document.getElementById('hint-button').onclick = function() {
+            fetch('/hint', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    start: "{{ start }}",
+                    end: "{{ end }}",
+                    maze: "{{ maze }}",
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = `Hint: ${data.path}`;
+            });
+        };
+    </script>
 </body>
 </html>

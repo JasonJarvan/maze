@@ -4,18 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1dd8dd20-5205-49b7-bef2-186adbffc0fe" name="更改" comment="bokeh">
-      <change afterPath="$PROJECT_DIR$/frontend/src/Maze.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/MazeSolver.js" afterDir="false" />
+    <list default="true" id="1dd8dd20-5205-49b7-bef2-186adbffc0fe" name="更改" comment="new">
+      <change afterPath="$PROJECT_DIR$/backend/static/styles.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/BokehChart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/bokehUtils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/maze.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/maze.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/backend/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/BokehChart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/BokehChart.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/BokehChart.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/Maze.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/Maze.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +125,7 @@
       <option name="presentableId" value="Default" />
       <updated>1718168145914</updated>
       <workItem from="1718168147622" duration="24520000" />
-      <workItem from="1718350781324" duration="1651000" />
+      <workItem from="1718350781324" duration="6578000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <option name="closed" value="true" />
@@ -147,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718199570255</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="new">
+      <option name="closed" value="true" />
+      <created>1718352518429</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718352518429</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -157,7 +169,8 @@
     <MESSAGE value="init" />
     <MESSAGE value="init2" />
     <MESSAGE value="bokeh" />
-    <option name="LAST_COMMIT_MESSAGE" value="bokeh" />
+    <MESSAGE value="new" />
+    <option name="LAST_COMMIT_MESSAGE" value="new" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -165,6 +178,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/frontend/src/index.js</url>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backend/app.py</url>
+          <line>58</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

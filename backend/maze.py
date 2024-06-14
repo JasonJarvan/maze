@@ -1,67 +1,31 @@
 import random
-from bokeh.plotting import figure
-from bokeh.io import output_file, save
-import numpy as np
+from collections import deque
 
+def generate_maze(width, height):
+    maze = [[random.choice([0, 1]) for _ in range(width)] for _ in range(height)]
+    start = (random.randint(0, height-1), random.randint(0, width-1))
+    end = (random.randint(0, height-1), random.randint(0, width-1))
+    while start == end or maze[start[0]][start[1]] == 1 or maze[end[0]][end[1]] == 1:
+        start = (random.randint(0, height-1), random.randint(0, width-1))
+        end = (random.randint(0, height-1), random.randint(0, width-1))
+    shortest_path = bfs(maze, start, end)
+    return maze, start, end, shortest_path
 
-class Maze:
-    def __init__(self, size=10):
-        self.size = size
-        self.grid = np.zeros((size, size), dtype=bool)
-        self.start = (0, 0)
-        self.end = (size - 1, size - 1)
-        self.generate_maze()
+def bfs(maze, start, end):
+    queue = deque([(start, 0, "")])
+    visited = set()
+    directions = {'D': (1, 0), 'U': (-1, 0), 'R': (0, 1), 'L': (0, -1)}
+    while queue:
+        (x, y), length, path = queue.popleft()
+        if (x, y) == end:
+            return length, path
+        for direction, (dx, dy) in directions.items():
+            nx, ny = x + dx, y + dy
+            if 0 <= nx < len(maze) and 0 <= ny < len(maze[0]) and maze[nx][ny] == 0 and (nx, ny) not in visited:
+                visited.add((nx, ny))
+                queue.append(((nx, ny), length + 1, path + direction))
+    return None, None
 
-    def generate_maze(self):
-        for i in range(self.size):
-            for j in range(self.size):
-                self.grid[i, j] = random.choice([True, False])
-        self.grid[self.start] = False
-        self.grid[self.end] = False
-
-    def solve_maze(self):
-        # Use DFS to find the path from start to end
-        stack = [(self.start, "")]
-        visited = set()
-        directions = [(1, 0, "D"), (0, 1, "R"), (-1, 0, "U"), (0, -1, "L")]
-
-        while stack:
-            (current, path) = stack.pop()
-            if current in visited:
-                continue
-            visited.add(current)
-
-            if current == self.end:
-                return path
-
-            for d in directions:
-                next_cell = (current[0] + d[0], current[1] + d[1])
-                if (0 <= next_cell[0] < self.size and 0 <= next_cell[1] < self.size and not self.grid[next_cell]):
-                    stack.append((next_cell, path + d[2]))
-
-        return None
-
-    def render_maze(self):
-        p = figure(x_range=(0, self.size), y_range=(0, self.size), plot_width=400, plot_height=400)
-        p.grid.visible = False
-        p.axis.visible = False
-
-        for i in range(self.size):
-            for j in range(self.size):
-                color = "red" if self.grid[i, j] else "white"
-                p.rect(x=[j + 0.5], y=[self.size - i - 0.5], width=1, height=1, color=color)
-
-        p.rect(x=[self.start[1] + 0.5], y=[self.size - self.start[0] - 0.5], width=1, height=1, color="blue")
-        p.rect(x=[self.end[1] + 0.5], y=[self.size - self.end[0] - 0.5], width=1, height=1, color="black")
-
-        return p
-
-    def save_maze(self):
-        p = self.render_maze()
-        output_file("/mnt/data/maze.html")
-        save(p)
-
-
-# Example usage
-maze = Maze()
-maze.save_maze()
+def solve_maze(maze, start, end):
+    correct_length, path = bfs(maze, start, end)
+    return correct_length, path
